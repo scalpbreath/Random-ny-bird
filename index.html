@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Random NY Bird</title>
-
 <script>
+window.onload = function () {
 
-const birds = [
+  const birds = [
 "https://en.wikipedia.org/wiki/American_avocet",
 "https://en.wikipedia.org/wiki/American_barn_owl",
 "https://en.wikipedia.org/wiki/American_bittern",
@@ -170,18 +166,33 @@ const birds = [
 "https://en.wikipedia.org/wiki/Yellow-billed_cuckoo",
 "https://en.wikipedia.org/wiki/Yellow-rumped_warbler",
 "https://en.wikipedia.org/wiki/Yellow-throated_vireo",
-];
+  ];
 
-const randomBird = birds[Math.floor(Math.random() * birds.length)];
+  // --- Fisher-Yates shuffle ---
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
 
-window.location.replace(randomBird);
+  // Load or initialize remaining pool
+  let pool = JSON.parse(localStorage.getItem("birdPool"));
 
+  // If empty or first visit, refill and shuffle
+  if (!pool || pool.length === 0) {
+    pool = shuffle([...birds]); // copy + shuffle
+  }
+
+  // Pick next bird
+  const nextBird = pool.pop();
+
+  // Save updated pool
+  localStorage.setItem("birdPool", JSON.stringify(pool));
+
+  // Redirect
+  window.location.replace(nextBird);
+
+};
 </script>
-
-</head>
-<body>
-
-<p>Loading...</p>
-
-</body>
-</html>
