@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Random NY Bird</title>
+
+<script>
+
+const birds = [
+"https://en.wikipedia.org/wiki/American_robin",
+"https://en.wikipedia.org/wiki/Bald_eagle",
+"https://en.wikipedia.org/wiki/Black-capped_chickadee",
+"https://en.wikipedia.org/wiki/Blue_jay",
+"https://en.wikipedia.org/wiki/Northern_cardinal",
+"https://en.wikipedia.org/wiki/Belted_kingfisher",
+"https://en.wikipedia.org/wiki/Red-tailed_hawk",
+"https://en.wikipedia.org/wiki/Wood_duck"
+];
+
+const randomBird = birds[Math.floor(Math.random() * birds.length)];
+
+window.location.replace(randomBird);
+
+</script>
+
+</head>
+<body>
+
+<p>Loading...</p>
+
+</body>
+</html>
